@@ -1,101 +1,111 @@
 # SECUREFACE X
 
-### Security-Enhanced Deep Learning Based Face Biometric Authentication System
+## Security-Enhanced Deep Learning Based Face Biometric Authentication System
 
 <p align="center">
-  <b>Deep Learning • Biometric Authentication • Template Security • Threat Detection • SOC Monitoring</b>
+  <b>Deep Learning • Face Biometrics • Cybersecurity • Encryption • Integrity Protection • Security Monitoring</b>
+</p>
+
+<p align="center">
+  A security-focused biometric authentication system that combines deep-learning-based face recognition with biometric template protection, tamper detection, authentication-abuse prevention, audit logging, and SOC-style security monitoring.
 </p>
 
 ---
 
-## Overview
+# 1. Project Overview
 
-**SECUREFACE X** is a security-focused face biometric authentication system designed to demonstrate how deep-learning-based facial recognition can be strengthened with practical cybersecurity controls.
+**SECUREFACE X** is a security-enhanced face biometric authentication system developed to address an important limitation of conventional face-recognition applications:
 
-The system uses a **pretrained FaceNet/InceptionResNetV1 model** to generate 512-dimensional facial embeddings and performs identity verification using cosine similarity. Registered biometric templates are protected using **AES-256-CBC encryption**, while **SHA-256 integrity verification** and a **local hash-chained tamper-evident ledger** provide additional protection against unauthorized modification.
+> High recognition accuracy alone does not guarantee the security of a biometric authentication system.
 
-The system also incorporates authentication-abuse detection, temporary account lockout, security-event logging, and a **Security Operations Center (SOC)-style dashboard** for monitoring biometric security events.
+Traditional face-recognition applications generally focus on detecting a face, generating an embedding, and determining whether the face matches a registered identity.
 
----
+SECUREFACE X extends this approach by adding multiple security layers around the biometric authentication process.
 
-## Key Highlights
+The system combines:
 
-- Face detection using **MTCNN**
-- Face representation using **FaceNet / InceptionResNetV1**
+- Deep-learning-based face representation
+- Face detection
 - 512-dimensional facial embeddings
-- Pretrained **VGGFace2** weights
-- Cosine similarity-based identity verification
-- AES-256-CBC encrypted biometric templates
-- SHA-256 template integrity verification
+- Biometric template generation
+- AES-256-CBC encryption
+- SHA-256 integrity verification
 - Hash-chained tamper-evident ledger
-- Authentication abuse detection
-- Three-attempt temporary lockout
+- Cosine similarity-based authentication
+- Image-quality checking
+- Failed-authentication monitoring
+- Temporary account lockout
 - Security-event logging
-- SQLite-based audit storage
-- SOC-style security monitoring dashboard
-- Controlled defensive biometric Attack Lab
-- ROC, AUC, FAR, FRR and F1-based evaluation
+- SQLite database
+- SOC-style security dashboard
+- Controlled defensive Attack Lab
+- Biometric performance evaluation
+
+The objective is to demonstrate how a deep-learning biometric authentication system can be protected against unauthorized template modification and repeated authentication abuse while providing security monitoring and auditability.
 
 ---
 
-## System Architecture
+# 2. Problem Statement
+
+Face recognition provides a convenient authentication mechanism, but biometric systems introduce additional security concerns.
+
+Unlike passwords, biometric characteristics such as facial features cannot simply be changed after compromise.
+
+A biometric authentication system therefore needs protection against problems such as:
+
+- Unauthorized access to biometric templates
+- Modification of stored biometric data
+- Repeated authentication attempts
+- Authentication abuse
+- Poor-quality input images
+- Lack of security auditing
+- Lack of visibility into security events
+
+SECUREFACE X addresses these concerns by combining the biometric recognition pipeline with dedicated security controls.
+
+---
+
+# 3. Project Objectives
+
+The major objectives of SECUREFACE X are:
+
+1. Detect and extract faces from input images.
+2. Generate robust facial representations using a pretrained deep-learning model.
+3. Generate biometric templates for registered subjects.
+4. Protect stored biometric templates using AES-256 encryption.
+5. Detect unauthorized modification using SHA-256 integrity verification.
+6. Provide an additional hash-chained tamper-evident ledger.
+7. Authenticate users using cosine similarity.
+8. Monitor repeated authentication failures.
+9. Temporarily lock subjects after repeated failures.
+10. Record security events in a database.
+11. Provide a SOC-style security monitoring dashboard.
+12. Provide a controlled Attack Lab for defensive security validation.
+13. Evaluate biometric performance using ROC, AUC, FAR, FRR, TAR and F1 metrics.
+
+---
+
+# 4. Core Concept
+
+The system can be divided into two major layers.
+
+## Biometric Layer
+
+The biometric layer answers:
+
+> "Does the submitted face match the registered identity?"
+
+It contains:
 
 ```text
-                         INPUT FACE IMAGE
-                                |
-                                v
-                       +----------------+
-                       |  MTCNN Face    |
-                       |   Detection    |
-                       +-------+--------+
-                               |
-                               v
-                    +-----------------------+
-                    | FaceNet /             |
-                    | InceptionResNetV1     |
-                    +----------+------------+
-                               |
-                               v
-                       512-D EMBEDDING
-                               |
-                 +-------------+-------------+
-                 |                           |
-                 v                           v
-        REGISTERED TEMPLATE           INPUT EMBEDDING
-                 |                           |
-                 v                           |
-          AES-256-CBC                       |
-          Protected Storage                 |
-                 |                           |
-                 v                           |
-          SHA-256 Integrity                 |
-                 |                           |
-                 v                           |
-        Hash-Chained Ledger                 |
-                 |                           |
-                 +-------------+-------------+
-                               |
-                               v
-                     Cosine Similarity
-                               |
-                     +---------+---------+
-                     |                   |
-                     v                   v
-                  MATCH               NO MATCH
-                     |                   |
-                     v                   v
-                VERIFIED              REJECTED
-                                         |
-                                         v
-                              Failed Attempt Monitor
-                                         |
-                                  3 Failed Attempts
-                                         |
-                                         v
-                                  TEMPORARY LOCKOUT
-                                         |
-                                         v
-                                  SECURITY EVENT
-                                         |
-                                         v
-                                  SOC DASHBOARD
+Input Image
+     ↓
+Face Detection
+     ↓
+FaceNet / InceptionResNetV1
+     ↓
+512-D Face Embedding
+     ↓
+Cosine Similarity
+     ↓
+VERIFIED / REJECTED
