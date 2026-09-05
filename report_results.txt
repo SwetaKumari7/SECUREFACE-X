@@ -1,0 +1,46 @@
+SECUREFACE PROJECT RESULTS
+============================================================
+
+PROJECT
+Security Enhancement in Deep Learning Based Face Biometric Authentication System
+
+DATASET
+Subjects              : 200
+Total images          : 2800
+Training images       : 1400
+Testing images        : 1400
+Successful embeddings  : 1387
+Skipped images         : 13
+
+MODEL
+Face detector         : MTCNN
+Feature extractor     : FaceNet / InceptionResnetV1
+Embedding dimension   : 512
+
+SECURITY
+Encryption            : AES-256-CBC
+Integrity             : SHA-256
+Ledger                : Local hash-chained tamper-evident ledger
+Database              : SQLite
+
+AUTHENTICATION RESULTS
+Threshold             : 0.62
+Identification Accuracy: 99.13%
+ROC-AUC               : 99.6805%
+TAR                   : 99.1348%
+FAR                   : 0.1460%
+FRR                   : 0.8652%
+
+EER ANALYSIS
+EER Threshold         : 0.55
+EER FAR               : 0.6583%
+EER FRR               : 0.7210%
+
+ADDITIONAL ANALYSIS
+Best Raw Accuracy Threshold : 0.73
+Best Raw Accuracy            : 99.9816%
+Best F1 Threshold            : 0.73
+Best F1 Score                : 98.1528%
+
+RECOMMENDED REPORT STATEMENT
+The proposed face biometric authentication system achieved an ROC-AUC of 99.68%, demonstrating strong discrimination between genuine and impostor attempts. At the selected authentication threshold of 0.62, the system achieved a TAR of 99.13%, FAR of 0.146%, and FRR of 0.865%.
